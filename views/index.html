@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+    
+    <script type="application/javascript" src="./javascripts/lib/underscore-min.js"></script>
+    <script type="application/javascript" src="./javascripts/lib/jquery-2.1.3.min.js"></script>
+    <script type="application/javascript" src="./javascripts/lib/angular.min.js"></script>
+    <script type="application/javascript" src="./javascripts/app/simplealbum.js"></script>
 </head>
-<body>
-    Hello World
+<body ng-app="SimpleAlbum">
+    <div class="book" ng-controller="MainCtrl">
+        <div class="photo">
+            <img src="{{viewImage}}" />
+        </div>
+        <div class="nav">
+            <img ng-repeat="image in album.images" src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
+        </div>
+    </div>
 </body>
 </html>

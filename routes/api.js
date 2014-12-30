@@ -10,26 +10,52 @@ var router = express.Router();
 
 
 
-var base = './images',
-    dist = './public/images/';
+var BASE = './albums',
+    DIST = './public/albums/';
 
 
-function transImage (src, dist, size) {
+function readImages (src) {
+    return new Promise(function (resolve, reject) {
+        return fs.readdir(src, function (err, files) {
+            if (!!err) {
+                return reject();
+            }
+            return resolve(files);
+        });
+    });
+}
+
+
+function getValidImages (src, files) {
     
-    console.log('transImage');
+    if (!files) {
+        return readImages(src).then(function (files) {
+           return getValidImages(src, files); 
+        });
+    }
+    
+    return Promise.all(_.map(files, function (file) {
+        return easyimage.info(path.join(src, file)).then(function () {
+            return file;
+        }).catch(function () {
+            return;
+        });
+    })).then(function (results) {
+        return _.compact(results);
+    });
+}
+
+
+
+function transImage (files, src, dist, size) {
     
     return new Promise(function (resolve, reject) {
-        
-        console.log('Promise');
         
         async.waterfall([
             function (cb) {
                 return mkdirp(dist, cb);
             },
-            function (path, cb) {
-                return fs.readdir(src, cb);
-            },
-            function (files, cb) {
+            function (dirpath, cb) {
                 return Promise.all(_.map(files, function (file) {
                     return easyimage.resize({
                         src : path.join(src, file),
@@ -53,7 +79,32 @@ function transImage (src, dist, size) {
 }
 
 
-/* GET users listing. */
+function makeAlbum(name, images) {
+    
+    return new Promise(function (resolve, reject) {
+        
+        var album = {
+            name : name,
+            images : _.map(images, _.identity)
+        };
+        
+        async.waterfall([
+            function (cb) {
+                return mkdirp(path.join(DIST, name), cb);
+            },
+            function (dirpath, cb) {
+                fs.writeFile(path.join(DIST, name, 'album.json'), JSON.stringify(album), cb);
+            }
+        ], function (err) {
+            if (!!err) {
+                return rejcet();
+            }
+            return resolve(album);
+        });
+    });
+}
+
+
 router.get('/make/:album', function(req, res) {
     
     if (!req.params.album) {
@@ -61,19 +112,23 @@ router.get('/make/:album', function(req, res) {
         return res.send('require album name');
     }
     
-    var folder = path.join(base, req.params.album);
+    var name = req.params.album,
+        src = path.join(BASE, name);
     
-    if (!folder) {
+    if (!src) {
         res.status(404);
-        return res.send('dose not exist album ' + req.params.album);
+        return res.send('dose not exist album ' + name);
     }
     
-    Promise.all([
-        transImage(folder, path.join(dist, req.params.album, 'thumbs'), 100),
-        transImage(folder, path.join(dist, req.params.album, 'photos'), 1000)
-    ]).then(function (results) {
-        console.log(results);
-        res.send('Success');
+    return getValidImages(src).then(function (files) {
+        return Promise.all([
+            makeAlbum(name, files),
+            transImage(files, src, path.join(DIST, name, 'thumbs'), 60),
+            transImage(files, src, path.join(DIST, name, 'photos'), 960)
+        ]).then(function (results) {
+            console.log(results[0]);
+            res.send('Success');
+        });
     });
     
 });

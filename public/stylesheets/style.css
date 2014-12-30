@@ -1,6 +1,29 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #ffd
+}
+
+div.photo,
+div.nav {
+    text-align: center;
+}
+
+div.photo > img {
+    border: 16px solid #fff;
+    box-shadow: 5px 5px 15px #999;
+}
+
+div.nav {
+    margin: 40px;
+}
+
+div.nav > img {
+    border: 5px solid #fff;
+    box-shadow: 2px 2px 6px #999;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 3px;
 }
 
 a {
