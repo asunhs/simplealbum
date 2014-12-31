@@ -9,13 +9,21 @@
     <script type="application/javascript" src="./javascripts/app/simplealbum.js"></script>
 </head>
 <body ng-app="SimpleAlbum">
-    <div class="book" ng-controller="MainCtrl">
-        <div class="photo">
-            <img src="{{viewImage}}" />
-        </div>
-        <div class="nav">
-            <img ng-repeat="image in album.images" src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
+    <div ng-controller="MainCtrl">
+        <ul class="albums">
+            <li ng-repeat="album in albums" ng-click="open(album)">{{album.title || album.name}}</li>
+        </ul>
+        <div class="book">
+            <div class="photo">
+                <img src="{{viewImage}}" />
+            </div>
+            <div class="nav">
+                <div>
+                    <img ng-repeat="image in album.images" src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
+                </div>
+            </div>
         </div>
     </div>
+    
 </body>
 </html>

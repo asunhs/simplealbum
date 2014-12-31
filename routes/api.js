@@ -14,7 +14,31 @@ var BASE = './albums',
     DIST = './public/albums/';
 
 
-function readImages (src) {
+function getAlbums() {
+    return new Promise(function (resolve, reject) {
+        async.waterfall([
+            function (cb) {
+                return fs.readdir(BASE, cb);
+            },
+            function (files, cb) {
+                return async.filter(files, function (file, cb) {
+                    fs.stat(path.join(BASE, file), function (err, stat) {
+                        return cb(stat.isDirectory());
+                    });
+                }, function (dirs) {
+                    cb(null, dirs);
+                });
+            }
+        ], function (err, dirs) {
+            if (!!err) {
+                return reject();
+            }
+            return resolve(dirs);
+        });
+    });
+}
+
+function readImages(src) {
     return new Promise(function (resolve, reject) {
         return fs.readdir(src, function (err, files) {
             if (!!err) {
@@ -26,7 +50,7 @@ function readImages (src) {
 }
 
 
-function getValidImages (src, files) {
+function getValidImages(src, files) {
     
     if (!files) {
         return readImages(src).then(function (files) {
@@ -46,8 +70,21 @@ function getValidImages (src, files) {
 }
 
 
+function getAlbumProfile(src) {
+    return new Promise(function (resolve, reject) {
+        return fs.readFile(path.join(src, 'album.json'), function (err, file) {
+            try {
+                return resolve(JSON.parse(file));
+            } catch (err) {
+                return resolve();
+            }
+        });
+    });
+}
 
-function transImage (files, src, dist, size) {
+
+
+function transImage(files, src, dist, size) {
     
     return new Promise(function (resolve, reject) {
         
@@ -81,31 +118,43 @@ function transImage (files, src, dist, size) {
 
 function makeAlbum(name, images) {
     
-    return new Promise(function (resolve, reject) {
+    return getAlbumProfile(path.join(BASE, name)).then(function (profile) {
         
-        var album = {
-            name : name,
-            images : _.map(images, _.identity)
-        };
+        return new Promise(function (resolve, reject) {
         
-        async.waterfall([
-            function (cb) {
-                return mkdirp(path.join(DIST, name), cb);
-            },
-            function (dirpath, cb) {
-                fs.writeFile(path.join(DIST, name, 'album.json'), JSON.stringify(album), cb);
-            }
-        ], function (err) {
-            if (!!err) {
-                return rejcet();
-            }
-            return resolve(album);
+            var album = _.extend({
+                name : name,
+                images : _.map(images, _.identity)
+            }, profile);
+
+            async.waterfall([
+                function (cb) {
+                    return mkdirp(path.join(DIST, name), cb);
+                },
+                function (dirpath, cb) {
+                    fs.writeFile(path.join(DIST, name, 'album.json'), JSON.stringify(album), cb);
+                }
+            ], function (err) {
+                if (!!err) {
+                    return rejcet();
+                }
+                return resolve(album);
+            });
         });
     });
 }
 
 
-router.get('/make/:album', function(req, res) {
+
+router.get('/albums', function (req, res) {
+    return getAlbums().then(function (albums) {
+        fs.writeFile(path.join(DIST, 'albums.json'), JSON.stringify(albums));
+        res.json(albums);
+    });
+});
+
+
+router.get('/build/:album', function(req, res) {
     
     if (!req.params.album) {
         res.status(403);
@@ -126,8 +175,7 @@ router.get('/make/:album', function(req, res) {
             transImage(files, src, path.join(DIST, name, 'thumbs'), 60),
             transImage(files, src, path.join(DIST, name, 'photos'), 960)
         ]).then(function (results) {
-            console.log(results[0]);
-            res.send('Success');
+            res.json(results[0]);
         });
     });
     
