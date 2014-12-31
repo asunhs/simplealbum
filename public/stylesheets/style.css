@@ -3,6 +3,21 @@ body {
     background-color: #ffd
 }
 
+ul.albums {
+    list-style-type: none;
+    padding: 0px;
+    margin: 15px;
+    text-align: center;
+}
+
+ul.albums > li {
+    display: inline;
+    padding: 10px;
+    margin: 2px;
+    background-color: #ddf;
+    cursor: pointer;
+}
+
 div.photo,
 div.nav > div {
     text-align: center;

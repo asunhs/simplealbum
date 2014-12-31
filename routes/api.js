@@ -2,8 +2,7 @@ var _ = require('underscore');
 var async = require('async');
 var express = require('express');
 var easyimage = require('easyimage');
-var fs = require('fs');
-var mkdirp = require('mkdirp');
+var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('promise');
 var router = express.Router();
@@ -90,7 +89,7 @@ function transImage(files, src, dist, size) {
         
         async.waterfall([
             function (cb) {
-                return mkdirp(dist, cb);
+                return fs.mkdirs(dist, cb);
             },
             function (dirpath, cb) {
                 return Promise.all(_.map(files, function (file) {
@@ -129,7 +128,7 @@ function makeAlbum(name, images) {
 
             async.waterfall([
                 function (cb) {
-                    return mkdirp(path.join(DIST, name), cb);
+                    return fs.mkdirs(path.join(DIST, name), cb);
                 },
                 function (dirpath, cb) {
                     fs.writeFile(path.join(DIST, name, 'album.json'), JSON.stringify(album), cb);
@@ -141,6 +140,36 @@ function makeAlbum(name, images) {
                 return resolve(album);
             });
         });
+    });
+}
+
+
+function build(name) {
+    
+    var src = path.join(BASE, name),
+        dist = path.join(DIST, name);
+    
+    if (!src) {
+        throw new Error('not exits album');
+    }
+    
+    return new Promise(function (resolve, reject) {
+        fs.remove(dist, function (err) {
+            if (!!err) {
+                return reject();
+            }
+            return resolve();
+        });
+    }).then(function () {
+        return getValidImages(src);
+    }).then(function (files) {
+        return Promise.all([
+            makeAlbum(name, files),
+            transImage(files, src, path.join(dist, 'thumbs'), 60),
+            transImage(files, src, path.join(dist, 'photos'), 960)
+        ]);
+    }).then(function (results) {
+        return results[0];
     });
 }
 
@@ -161,24 +190,47 @@ router.get('/build/:album', function(req, res) {
         return res.send('require album name');
     }
     
-    var name = req.params.album,
-        src = path.join(BASE, name);
-    
-    if (!src) {
-        res.status(404);
-        return res.send('dose not exist album ' + name);
+    try {
+        return build(req.params.album).then(function (album) {
+            return res.json(album);
+        }).catch(function () {
+            res.status(500);
+            return res.send('Build Fail');
+        });
+    } catch (err) {
+        res.status(500);
+        return res.send('dose not exist album ' + req.params.album);
     }
     
-    return getValidImages(src).then(function (files) {
-        return Promise.all([
-            makeAlbum(name, files),
-            transImage(files, src, path.join(DIST, name, 'thumbs'), 60),
-            transImage(files, src, path.join(DIST, name, 'photos'), 960)
-        ]).then(function (results) {
-            res.json(results[0]);
-        });
-    });
+});
+
+
+router.get('/rebuild', function (req, res) {
     
+    return new Promise(function (resolve, reject) {
+        async.waterfall([
+            _.partial(fs.remove, DIST),
+            _.partial(fs.mkdirs, DIST),
+        ], function (err) {
+            if (!!err) {
+                return reject();
+            }
+            return resolve();
+        });
+    }).then(getAlbums).then(function (names) {
+        fs.writeFile(path.join(DIST, 'albums.json'), JSON.stringify(names));
+        
+        return async.map(names, function (name, cb) {
+            return build(name).then(function (album) {
+                cb(null, name);
+            }).catch(function () {
+                cb();
+            });
+        }, function (err, names) {
+            res.json(_.compact(names));
+        });
+        
+    });
 });
 
 module.exports = router;
