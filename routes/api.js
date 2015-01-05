@@ -97,6 +97,8 @@ function transImage(files, src, dist, size) {
                         src : path.join(src, file),
                         dst : path.join(dist, file),
                         width : size
+                    }).then(function () {
+                        console.log('resized %s', file);
                     }).catch(function () {
                         return;
                     });
@@ -106,8 +108,10 @@ function transImage(files, src, dist, size) {
             }
         ], function (err, results) {
             if (!!err) {
+                console.log('image resizing fail from %s to %s', src, dist);
                 return rejcet();
             }
+            console.log('all images resized from %s to %s', src, dist);
             return resolve(results);
         });
     });

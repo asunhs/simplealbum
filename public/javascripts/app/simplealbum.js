@@ -11,16 +11,23 @@ angular.module('SimpleAlbum')
         $scope.album = album;
     };
     
+    function getPhotos(names) {
+        return $q.all(_.map(names, function (name) {
+            return $http.get(['albums', name, 'album.json'].join('/')).then(function (res) {
+                return res.data;
+            });
+        }));
+    };
+    
     $scope.view = view;
     
     $scope.open = open;
     
     $http.get('albums/albums.json').success(function (names) {
-        return $q.all(_.map(names, function (name) {
-            return $http.get(['albums', name, 'album.json'].join('/')).then(function (res) {
-                return res.data;
-            });
-        })).then(function (albums) {
+        
+        $scope.albumNames = names;
+        
+        return getPhotos(names).then(function (albums) {
             $scope.albums = albums;
         });
     });
@@ -29,16 +36,12 @@ angular.module('SimpleAlbum')
         $scope.album = res;
     });
     
-    $scope.$watch('albums', function (albums, old) {
-        if (albums === old) {
+    $scope.$watch('albumNames', function (albumNames, old) {
+        if (albumNames === old) {
             return;
         }
         
-        return $q.all(_.map(albums, function (album) {
-            return $http.get(['albums', album, 'album.json'].join('/')).then(function (res) {
-                return res.data;
-            });
-        })).then(function (albums) {
+        return getPhotos(albumNames).then(function (albums) {
             console.log(albums);
         });
     });
