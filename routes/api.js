@@ -170,7 +170,7 @@ function build(name) {
         return Promise.all([
             makeAlbum(name, files),
             transImage(files, src, path.join(dist, 'thumbs'), 60),
-            transImage(files, src, path.join(dist, 'photos'), 960)
+            transImage(files, src, path.join(dist, 'photos'), 840)
         ]);
     }).then(function (results) {
         return results[0];

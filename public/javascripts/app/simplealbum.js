@@ -1,15 +1,25 @@
 angular.module('SimpleAlbum', []);
 
 angular.module('SimpleAlbum')
-.controller('MainCtrl', ['$scope', '$http', '$q', function($scope, $http, $q) {
+.controller('MainCtrl', ['$scope', '$element', '$http', '$q', function($scope, $element, $http, $q) {
     
     function view(image) {
-        $scope.viewImage = ['./albums',$scope.album.name,'photos',image].join('/');
-    };
+        var photo = $element.find('div.photo > img');
+        
+        photo.removeClass('visible').addClass('hidden').one('transitionend', function () {
+            $scope.viewImage = ['./albums',$scope.album.name,'photos',image].join('/');
+
+            photo.one('load', function (e) {
+                photo.removeClass('hidden none').addClass('visible');
+            });
+            
+            $scope.$apply();
+        });
+    }
     
     function open(album) {
         $scope.album = album;
-    };
+    }
     
     function getPhotos(names) {
         return $q.all(_.map(names, function (name) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="SimpleAlbum">
 <head>
     <link rel="stylesheet" href="./stylesheets/style.css" />
     
@@ -8,8 +8,8 @@
     <script type="application/javascript" src="./javascripts/lib/angular.min.js"></script>
     <script type="application/javascript" src="./javascripts/app/simplealbum.js"></script>
 </head>
-<body ng-app="SimpleAlbum">
-    <div ng-controller="MainCtrl" class="basic">
+<body ng-controller="MainCtrl" class="basic">
+    <div>
         <ul class="albums">
             <li ng-repeat="album in albums" ng-click="open(album)">{{album.title || album.name}}</li>
         </ul>
