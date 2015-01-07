@@ -3,6 +3,7 @@
 body.basic {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-image: url(../images/bi.jpg);
+    width: 100%;
     margin: 0;
 }
 
@@ -39,6 +40,20 @@ body.basic ul.albums > li {
     font-size: 28px;
 }
 
+@media (max-width: 480px), (max-device-width: 480px) {
+    body.basic ul.albums {
+        height: 80px;
+        margin: 15px 0;
+        background-size: 592px;
+    }
+    
+    body.basic ul.albums > li {
+        padding: 10px 20px;
+        line-height: 80px;
+        font-size: 22px;
+    }
+}
+
 body.basic div.photo,
 body.basic div.nav > div {
     text-align: center;
@@ -51,9 +66,12 @@ body.basic div.photo {
 }
 
 body.basic div.photo:after {
-    content: url(../images/tape.png);
+    content: '';
+    background-image: url(../images/tape.png);
     position: absolute;
     top: 140px;
+    width: 180px;
+    height: 81px;
     left: calc(50% - 90px);
     left: -o-calc(50% - 90px);
     left: -ms-calc(50% - 90px);
@@ -66,6 +84,37 @@ body.basic div.photo > img {
     border-bottom: 64px solid #ffe;
     box-shadow: 5px 5px 15px #555;
     transform: rotate3d(50,-5,5,10deg);
+}
+
+@media (max-width: 960px) {
+    body.basic div.photo > img {
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 580px), (max-device-width: 480px) {
+    body.basic div.photo {
+        padding-top: 120px;
+    }
+    
+    body.basic div.photo > img {
+        border: 12px solid #ffe;
+        border-bottom: 48px solid #ffe;
+        box-shadow: 3px 3px 12px #555;
+        max-width: 240px;
+    }
+    
+    body.basic div.photo:after {
+        top: 100px;
+        width: 120px;
+        height: 60px;
+        background-size: 120px;
+        left: calc(50% - 60px);
+        left: -o-calc(50% - 60px);
+        left: -ms-calc(50% - 60px);
+        left: -moz-calc(50% - 60px);
+        left: -webkit-calc(50% - 60px);
+    }
 }
 
 body.basic div.nav {

@@ -4,6 +4,11 @@ angular.module('SimpleAlbum')
 .controller('MainCtrl', ['$scope', '$element', '$http', '$q', function($scope, $element, $http, $q) {
     
     function view(image) {
+        
+        if ($scope.viewImage === ['./albums',$scope.album.name,'photos',image].join('/')) {
+            return;
+        }
+        
         var photo = $element.find('div.photo > img');
         
         photo.removeClass('visible').addClass('hidden').one('transitionend', function () {
