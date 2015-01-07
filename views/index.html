@@ -16,11 +16,13 @@
         </ul>
         <div class="book">
             <div class="photo">
-                <img ng-src="{{viewImage}}" />
+                <img ng-src="./albums/{{album.name}}/photos/{{viewImage}}"/>
             </div>
             <div class="nav">
-                <div>
-                    <img ng-repeat="image in album.images" ng-src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
+                <div class="prev" ng-click="prev()"></div>
+                <div class="next" ng-click="next()"></div>
+                <div class="thumbs">
+                    <img ng-class="{on:image === viewImage}" ng-repeat="image in album.images" ng-src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
                 </div>
             </div>
         </div>

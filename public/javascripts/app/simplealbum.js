@@ -5,14 +5,14 @@ angular.module('SimpleAlbum')
     
     function view(image) {
         
-        if ($scope.viewImage === ['./albums',$scope.album.name,'photos',image].join('/')) {
+        if (!image || $scope.viewImage === image) {
             return;
         }
         
         var photo = $element.find('div.photo > img');
         
         photo.removeClass('visible').addClass('hidden').one('transitionend', function () {
-            $scope.viewImage = ['./albums',$scope.album.name,'photos',image].join('/');
+            $scope.viewImage = image;
 
             photo.one('load', function (e) {
                 photo.removeClass('hidden none').addClass('visible');
@@ -20,6 +20,18 @@ angular.module('SimpleAlbum')
             
             $scope.$apply();
         });
+    }
+    
+    function prev() {
+        try {
+            view($scope.album.images[$scope.album.images.indexOf($scope.viewImage)-1]);
+        } catch (err) {}
+    }
+    
+    function next() {
+        try {
+            view($scope.album.images[$scope.album.images.indexOf($scope.viewImage)+1]);
+        } catch (err) {}
     }
     
     function open(album) {
@@ -35,6 +47,10 @@ angular.module('SimpleAlbum')
     };
     
     $scope.view = view;
+    
+    $scope.prev = prev;
+    
+    $scope.next = next;
     
     $scope.open = open;
     
