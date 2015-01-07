@@ -92,8 +92,9 @@ function transImage(files, src, dist, size) {
                 return fs.mkdirs(dist, cb);
             },
             function (dirpath, cb) {
-                return Promise.all(_.map(files, function (file) {
-                    return easyimage.resize({
+                
+                return async.mapLimit(files, 10, function (file, next) {
+                    return next(null, easyimage.resize({
                         src : path.join(src, file),
                         dst : path.join(dist, file),
                         width : size
@@ -101,15 +102,21 @@ function transImage(files, src, dist, size) {
                         console.log('resized %s', file);
                     }).catch(function () {
                         return;
+                    }));
+                }, function (err, promises) {
+                    if (!!err) {
+                        return cb(err);
+                    }
+                    
+                    return Promise.all(promises).then(function (results) {
+                        return cb(null, _.compact(results));
                     });
-                })).then(function (results) {
-                    return cb(null, _.compact(results));
                 });
             }
         ], function (err, results) {
             if (!!err) {
                 console.log('image resizing fail from %s to %s', src, dist);
-                return rejcet();
+                return reject();
             }
             console.log('all images resized from %s to %s', src, dist);
             return resolve(results);
@@ -224,7 +231,7 @@ router.get('/rebuild', function (req, res) {
     }).then(getAlbums).then(function (names) {
         fs.writeFile(path.join(DIST, 'albums.json'), JSON.stringify(names));
         
-        return async.map(names, function (name, cb) {
+        return async.mapSeries(names, function (name, cb) {
             return build(name).then(function (album) {
                 cb(null, name);
             }).catch(function () {

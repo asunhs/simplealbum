@@ -1,68 +1,44 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 
-div.basic {
+div.wood {
     font: 14px 'Lobster', cursive;
-    color: #2d1e14;
-    background-image: url(../images/bi.jpg);
+    color: #ede5dd;
+    background-image: url(../images/bw.jpg);
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
-div.basic:before {
-    content: url(../images/upside.png);
-    opacity: .2;
+div.wood:before {
+    content: url(../images/leafs.png);
     position: fixed;
-    top: 115px;
-    left: 5px;
+    top: -15px;
+    left: -15px;
 }
 
-div.basic:after {
-    content: url(../images/downside.png);
-    opacity: 0;
-    position: fixed;
-    bottom: 5px;
-    right: 5px;
-}
-
-@media (max-device-width: 480px) {
-    div.basic:before {
-        top: 15px;
-        opacity: .2;
-    }
-    
-    div.basic:after {
-        bottom: -70px;
-        opacity: .2;
+@media (max-width: 580px), (max-device-width: 580px) {
+    div.wood:before {
+        top: -75px;
+        left: -75px;
     }
 }
 
-div.basic > div:before {
-    content: '';
-    background-image: url(../images/images.jpg);
-    width: 100%;
-    position: fixed;
-    top: 0;
-    height: 80px;
-    z-index: 1;
-}
-
-div.basic ul.albums {
+div.wood ul.albums {
     list-style-type: none;
     height: 105px;
     padding: 0;
-    margin: 20px 0;
+    margin: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    background-image: url(../images/torning.png);
     text-align: center;
     position: fixed;
+    background-color: rgba(0,0,0,.3);
     top: 0;
     width: 100%;
     z-index: 1;
 }
 
-div.basic ul.albums > li {
+div.wood ul.albums > li {
     display: inline;
     padding: 10px 30px;
     margin: 2px;
@@ -73,35 +49,35 @@ div.basic ul.albums > li {
 }
 
 @media (max-width: 480px), (max-device-width: 480px) {
-    div.basic ul.albums {
+    div.wood ul.albums {
         height: 80px;
-        margin: 15px 0;
+        margin: 0;
         background-size: 592px;
     }
     
-    div.basic ul.albums > li {
+    div.wood ul.albums > li {
         padding: 10px 20px;
         line-height: 80px;
         font-size: 22px;
     }
 }
 
-div.basic div.photo,
-div.basic div.nav > div {
+div.wood div.photo,
+div.wood div.nav > div {
     text-align: center;
 }
 
-div.basic div.photo {
+div.wood div.photo {
     overflow: hidden;
-    padding-top: 170px;
+    padding-top: 150px;
     padding-bottom: 60px;
 }
 
-div.basic div.photo:after {
+div.wood div.photo:after {
     content: '';
     background-image: url(../images/tape.png);
     position: absolute;
-    top: 140px;
+    top: 120px;
     width: 180px;
     height: 81px;
     left: calc(50% - 90px);
@@ -111,33 +87,33 @@ div.basic div.photo:after {
     left: -webkit-calc(50% - 90px);
 }
 
-div.basic div.photo > img {
+div.wood div.photo > img {
     border: 1px solid #ddd;
     padding: 16px 16px 64px 16px;
-    background-color: #fff;
-    box-shadow: 5px 5px 15px #555;
+    background-color: #ffe;
+    box-shadow: 5px 5px 15px #341d0f;
     transform: rotate3d(50,-5,5,10deg);
 }
 
 @media (max-width: 960px) {
-    div.basic div.photo > img {
+    div.wood div.photo > img {
         max-width: 520px;
     }
 }
 
 @media (max-width: 580px), (max-device-width: 580px) {
-    div.basic div.photo {
-        padding-top: 120px;
+    div.wood div.photo {
+        padding-top: 100px;
     }
     
-    div.basic div.photo > img {
+    div.wood div.photo > img {
         padding: 10px 10px 42px 10px;
-        box-shadow: 3px 3px 12px #555;
+        box-shadow: 3px 3px 12px #341d0f;
         max-width: 400px;
     }
     
-    div.basic div.photo:after {
-        top: 100px;
+    div.wood div.photo:after {
+        top: 80px;
         width: 120px;
         height: 52px;
         background-size: 120px;
@@ -150,68 +126,67 @@ div.basic div.photo > img {
 }
 
 @media (max-device-width: 480px) {
-    div.basic div.photo > img {
+    div.wood div.photo > img {
         max-width: 280px;
     }
 }
 
 @media (max-device-width: 320px) {
-    div.basic div.photo > img {
+    div.wood div.photo > img {
         max-width: 220px;
     }
 }
 
-div.basic div.nav {
+div.wood div.nav {
     position: fixed;
     bottom: 0;
     width: 100%;
-    z-index: 1;
 }
 
-div.basic div.nav > div.prev,
-div.basic div.nav > div.next {
+div.wood div.nav > div.prev,
+div.wood div.nav > div.next {
     height: 100%;
     width: 200px;
-    background-color: #555;
+    background-color: #341d0f;
     opacity: 0;
     position: fixed;
     top: 0;
     cursor: pointer;
 }
 
-div.basic div.nav > div.prev {
+div.wood div.nav > div.prev {
     left: 0;
-    box-shadow: 20px 0px 50px #555;
+    box-shadow: 20px 0px 50px #341d0f;
 }
 
-div.basic div.nav > div.next {
+div.wood div.nav > div.next {
     right: 0;
-    box-shadow: -20px 0px 50px #555;
+    box-shadow: -20px 0px 50px #341d0f;
 }
 
-div.basic div.nav > div.prev:hover,
-div.basic div.nav > div.next:hover {
-    opacity: .2;
+div.wood div.nav > div.prev:hover,
+div.wood div.nav > div.next:hover {
+    opacity: .3;
 }
 
 @media (max-width: 580px), (max-device-width: 480px) {
-    div.basic div.nav > div.prev,
-    div.basic div.nav > div.next {
+    div.wood div.nav > div.prev,
+    div.wood div.nav > div.next {
         width: 100px;
     }
     
-    div.basic div.nav > div.prev:hover,
-    div.basic div.nav > div.next:hover {
+    div.wood div.nav > div.prev:hover,
+    div.wood div.nav > div.next:hover {
         opacity: 0;
     }
     
-    div.basic div.nav > div.prev:active,
-    div.basic div.nav > div.next:active {
-        opacity: .2;
+    div.wood div.nav > div.prev:active,
+    div.wood div.nav > div.next:active {
+        opacity: .3;
     }
 }
 
-div.basic div.nav > div.thumbs {
+div.wood div.nav > div.thumbs {
     white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -220,21 +195,21 @@ div.basic div.nav > div.thumbs {
     margin: 0 auto;
 }
 
-div.basic div.nav > div.thumbs > img {
+div.wood div.nav > div.thumbs > img {
     border: 4px solid #fff;
     border-bottom: 12px solid #fff;
-    box-shadow: 2px 2px 8px #555;
+    box-shadow: 2px 2px 8px #341d0f;
     vertical-align: middle;
     cursor: pointer;
     opacity: .5;
     margin: 3px;
 }
 
-div.basic div.nav > div.thumbs > img.on {
+div.wood div.nav > div.thumbs > img.on {
     opacity: 1;
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n+1) {
+div.wood div.nav > div.thumbs > img:nth-child(6n+1) {
     transform: rotate(5deg);
     -o-transform: rotate(5deg);
     -ms-transform: rotate(5deg);
@@ -242,7 +217,7 @@ div.basic div.nav > div.thumbs > img:nth-child(6n+1) {
     -webkit-transform: rotate(5deg);
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n+2) {
+div.wood div.nav > div.thumbs > img:nth-child(6n+2) {
     transform: rotate(-10deg);
     -o-transform: rotate(-10deg);
     -ms-transform: rotate(-10deg);
@@ -250,7 +225,7 @@ div.basic div.nav > div.thumbs > img:nth-child(6n+2) {
     -webkit-transform: rotate(-10deg);
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n+3) {
+div.wood div.nav > div.thumbs > img:nth-child(6n+3) {
     transform: rotate(2deg);
     -o-transform: rotate(2deg);
     -ms-transform: rotate(2deg);
@@ -258,7 +233,7 @@ div.basic div.nav > div.thumbs > img:nth-child(6n+3) {
     -webkit-transform: rotate(2deg);
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n+4) {
+div.wood div.nav > div.thumbs > img:nth-child(6n+4) {
     transform: rotate(-12deg);
     -o-transform: rotate(-12deg);
     -ms-transform: rotate(-12deg);
@@ -266,7 +241,7 @@ div.basic div.nav > div.thumbs > img:nth-child(6n+4) {
     -webkit-transform: rotate(-12deg);
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n+5) {
+div.wood div.nav > div.thumbs > img:nth-child(6n+5) {
     transform: rotate(-4deg);
     -o-transform: rotate(-4deg);
     -ms-transform: rotate(-4deg);
@@ -274,7 +249,7 @@ div.basic div.nav > div.thumbs > img:nth-child(6n+5) {
     -webkit-transform: rotate(-4deg);
 }
 
-div.basic div.nav > div.thumbs > img:nth-child(6n) {
+div.wood div.nav > div.thumbs > img:nth-child(6n) {
     transform: rotate(10deg);
     -o-transform: rotate(10deg);
     -ms-transform: rotate(10deg);
@@ -282,16 +257,16 @@ div.basic div.nav > div.thumbs > img:nth-child(6n) {
     -webkit-transform: rotate(10deg);
 }
 
-div.basic a {
+div.wood a {
   color: #00B7FF;
 }
 
-div.basic .visible {
+div.wood .visible {
   opacity: 1;
   transition: opacity 1s linear;
 }
 
-div.basic .hidden {
+div.wood .hidden {
   opacity: 0;
   transition: opacity 0.5s linear;
 }

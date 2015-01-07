@@ -1,4 +1,5 @@
 @import 'basic.css';
+@import 'wood.css';
 
 
 
@@ -10,7 +11,16 @@ html {
     scrollbar-Track-Color: #efefef;
     scrollbar-DarkShadow-Color: #efefef;
     scrollbar-Highlight-Color: #efefef;
-    scrollbar-Shadow-Color: #efefef
+    scrollbar-Shadow-Color: #efefef;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
 }
 
 none {

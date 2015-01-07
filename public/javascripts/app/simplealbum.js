@@ -1,7 +1,10 @@
-angular.module('SimpleAlbum', []);
+angular.module('SimpleAlbum', ['ngRoute']);
 
 angular.module('SimpleAlbum')
-.controller('MainCtrl', ['$scope', '$element', '$http', '$q', function($scope, $element, $http, $q) {
+.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/:theme', {templateUrl: 'book.html' }).otherwise('/basic');
+}])
+.controller('MainCtrl', ['$scope', '$element', '$http', '$q', '$routeParams', function($scope, $element, $http, $q, $routeParams) {
     
     function view(image) {
         
@@ -46,6 +49,8 @@ angular.module('SimpleAlbum')
         }));
     };
     
+    $scope.theme = $routeParams.theme;
+    
     $scope.view = view;
     
     $scope.prev = prev;
@@ -60,11 +65,8 @@ angular.module('SimpleAlbum')
         
         return getPhotos(names).then(function (albums) {
             $scope.albums = albums;
+            $scope.album = $scope.albums[0];
         });
-    });
-    
-    $http.get('albums/base/album.json').success(function (res) {
-        $scope.album = res;
     });
     
     $scope.$watch('albumNames', function (albumNames, old) {

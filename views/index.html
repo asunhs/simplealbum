@@ -6,27 +6,11 @@
     
     <script type="application/javascript" src="./javascripts/lib/underscore-min.js"></script>
     <script type="application/javascript" src="./javascripts/lib/jquery-2.1.3.min.js"></script>
-    <script type="application/javascript" src="./javascripts/lib/angular.min.js"></script>
+    <script type="application/javascript" src="./javascripts/lib/angular.js"></script>
+    <script type="application/javascript" src="./javascripts/lib/angular-route.js"></script>
     <script type="application/javascript" src="./javascripts/app/simplealbum.js"></script>
 </head>
-<body ng-controller="MainCtrl" class="basic">
-    <div>
-        <ul class="albums">
-            <li ng-repeat="album in albums" ng-click="open(album)">{{album.title || album.name}}</li>
-        </ul>
-        <div class="book">
-            <div class="photo">
-                <img ng-src="./albums/{{album.name}}/photos/{{viewImage}}"/>
-            </div>
-            <div class="nav">
-                <div class="prev" ng-click="prev()"></div>
-                <div class="next" ng-click="next()"></div>
-                <div class="thumbs">
-                    <img ng-class="{on:image === viewImage}" ng-repeat="image in album.images" ng-src="./albums/{{album.name}}/thumbs/{{image}}" ng-click="view(image)" />
-                </div>
-            </div>
-        </div>
-    </div>
-    
+<body>
+    <ng-view></ng-view>
 </body>
 </html>
