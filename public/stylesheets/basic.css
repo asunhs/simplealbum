@@ -263,6 +263,12 @@ div.basic div.nav > div.thumbs > img {
     margin: 3px;
 }
 
+div.basic div.nav > div.thumbs > img:hover {
+    box-shadow: 2px 8px 8px #555;
+    position: relative;
+    top: -10px;
+}
+
 div.basic div.nav > div.thumbs > img.on {
     opacity: 1;
 }
