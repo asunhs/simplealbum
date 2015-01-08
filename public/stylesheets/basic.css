@@ -95,7 +95,7 @@ div.basic div.book:after {
     content: '';
     width: 65px;
     height: 180px;
-    position: fixed;
+    position: absolute;
     top: calc(50% - 90px);
 }
 
@@ -259,8 +259,16 @@ div.basic div.nav > div.thumbs > img {
     box-shadow: 2px 2px 8px #555;
     vertical-align: middle;
     cursor: pointer;
-    opacity: .5;
+    opacity: .6;
     margin: 3px;
+}
+
+div.basic div.nav > div.thumbs > img:first-child{
+    margin-left:100px;
+}
+
+div.basic div.nav > div.thumbs > img:last-child{
+    margin-right:100px;
 }
 
 div.basic div.nav > div.thumbs > img:hover {
