@@ -9,7 +9,7 @@ div.wood {
     margin: 0;
 }
 
-div.wood:after {
+div.wood:before {
     content: url(../images/leafs.png);
     position: fixed;
     top: -15px;
@@ -21,6 +21,10 @@ div.wood:after {
         top: -75px;
         left: -75px;
     }
+}
+
+div.wood > div {
+    z-index: 2;
 }
 
 div.wood ul.albums {
