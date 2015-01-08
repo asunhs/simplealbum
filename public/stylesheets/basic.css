@@ -73,6 +73,10 @@ div.basic ul.albums > li {
 }
 
 @media (max-width: 480px), (max-device-width: 480px) {
+    div.basic > div:before {
+        height: 60px;
+    }
+    
     div.basic ul.albums {
         height: 80px;
         margin: 15px 0;
@@ -220,7 +224,7 @@ div.basic div.nav > div.next {
 
 div.basic div.nav > div.prev:hover,
 div.basic div.nav > div.next:hover {
-    opacity: .2;
+    opacity: .1;
 }
 
 @media (max-width: 580px), (max-device-width: 480px) {
