@@ -6,6 +6,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var Promise = require('promise');
 var router = express.Router();
+var spawn = require('child_process').spawn;
 
 
 
@@ -241,6 +242,22 @@ router.get('/rebuild', function (req, res) {
             res.json(_.compact(names));
         });
         
+    });
+});
+
+router.get('/dist', function (req, res) {
+    var child = spawn(process.env.comspec, ['/c', 'git', 'pull', 'origin']);
+    
+    child.stdout.on('data', function(data) {
+        console.log(data.toString());
+    });
+    
+    child.stdout.on('end', function () {
+        res.send('done');
+    });
+
+    child.on('error', function(err) {
+        res.json(err);
     });
 });
 
