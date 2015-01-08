@@ -112,10 +112,10 @@ div.basic div.book:after {
 @media (max-width: 480px), (max-device-width: 480px) {
     div.basic div.book:before,
     div.basic div.book:after {
-        background-size: 44px 120px;
-        width: 43px;
-        height: 120px;
-        top: calc(50% - 60px);
+        background-size: 33px 90px;
+        width: 32px;
+        height: 90px;
+        top: calc(50% - 45px);
     }
 }
 
