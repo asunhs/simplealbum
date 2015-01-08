@@ -9,7 +9,7 @@ div.wood {
     margin: 0;
 }
 
-div.wood:before {
+div.wood:after {
     content: url(../images/leafs.png);
     position: fixed;
     top: -15px;
