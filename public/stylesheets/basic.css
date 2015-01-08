@@ -59,7 +59,7 @@ div.basic ul.albums {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
 }
 
 div.basic ul.albums > li {
@@ -83,6 +83,35 @@ div.basic ul.albums > li {
         padding: 10px 20px;
         line-height: 80px;
         font-size: 22px;
+    }
+}
+
+div.basic div.book:before,
+div.basic div.book:after {
+    content: '';
+    width: 65px;
+    height: 180px;
+    position: fixed;
+    top: calc(50% - 90px);
+}
+
+div.basic div.book:before {
+    background-image: url(../images/prev.png);
+    left: 0;
+}
+
+div.basic div.book:after {
+    background-image: url(../images/next.png);
+    right: 0;
+}
+
+@media (max-width: 480px), (max-device-width: 480px) {
+    div.basic div.book:before,
+    div.basic div.book:after {
+        background-size: 44px 120px;
+        width: 43px;
+        height: 120px;
+        top: calc(50% - 60px);
     }
 }
 
