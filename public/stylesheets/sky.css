@@ -23,7 +23,7 @@ div.sky:before {
 @media (max-width: 580px), (max-device-width: 580px) {
     
     div.sky {
-        background-size: 600px;
+        background-size: 1200px;
     }
     
     div.sky:before {
