@@ -106,7 +106,7 @@ div.sky div.photo:after {
 div.sky div.photo > img {
     border: 1px solid #ddd;
     padding: 16px 16px 64px 16px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, .8);
     box-shadow: 5px 5px 15px #3e4f71;
     transform: rotate3d(50,-5,5,10deg);
 }
@@ -212,8 +212,8 @@ div.sky div.nav > div.thumbs {
 }
 
 div.sky div.nav > div.thumbs > img {
-    border: 4px solid #fff;
-    border-bottom: 12px solid #fff;
+    padding: 4px 4px 12px 4px;
+    background-color: rgba(255, 255, 255, .8);
     box-shadow: 2px 2px 8px #3e4f71;
     vertical-align: middle;
     cursor: pointer;
