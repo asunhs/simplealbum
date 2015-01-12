@@ -113,15 +113,15 @@ div.wood div.photo > img {
     }
     
     div.wood div.photo:after {
-        top: 80px;
-        width: 120px;
-        height: 52px;
-        background-size: 120px;
-        left: calc(50% - 60px);
-        left: -o-calc(50% - 60px);
-        left: -ms-calc(50% - 60px);
-        left: -moz-calc(50% - 60px);
-        left: -webkit-calc(50% - 60px);
+        top: 30px;
+        width: 60px;
+        height: 121px;
+        background-size: 60px;
+        left: calc(50% + 30px);
+        left: -o-calc(50% + 30px);
+        left: -ms-calc(50% + 30px);
+        left: -moz-calc(50% + 30px);
+        left: -webkit-calc(50% + 30px);
     }
 }
 
