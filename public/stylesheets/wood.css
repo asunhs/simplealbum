@@ -191,7 +191,7 @@ div.wood div.nav > div.thumbs {
     overflow-x: auto;
     overflow-y: hidden;
     width: 98%;
-    padding-top: 10px;
+    padding-top: 50px;
     margin: 0 auto;
 }
 
@@ -201,7 +201,6 @@ div.wood div.nav > div.thumbs > img {
     box-shadow: 2px 2px 8px #341d0f;
     vertical-align: middle;
     cursor: pointer;
-    opacity: .6;
     margin: 3px;
 }
 
@@ -213,14 +212,11 @@ div.wood div.nav > div.thumbs > img:last-child{
     margin-right:100px;
 }
 
-div.wood div.nav > div.thumbs > img:hover {
-    box-shadow: 2px 8px 8px #341d0f;
-    position: relative;
-    top: -10px;
-}
-
+div.wood div.nav > div.thumbs > img:hover,
 div.wood div.nav > div.thumbs > img.on {
-    opacity: 1;
+    box-shadow: 2px 14px 8px #341d0f;
+    position: relative;
+    top: -16px;
 }
 
 div.wood div.nav > div.thumbs > img:nth-child(6n+1) {
