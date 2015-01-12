@@ -79,16 +79,12 @@ div.wood div.photo {
 
 div.wood div.photo:after {
     content: '';
-    background-image: url(../images/tape.png);
+    background-image: url(../images/clip.png);
     position: absolute;
-    top: 120px;
-    width: 180px;
-    height: 81px;
-    left: calc(50% - 90px);
-    left: -o-calc(50% - 90px);
-    left: -ms-calc(50% - 90px);
-    left: -moz-calc(50% - 90px);
-    left: -webkit-calc(50% - 90px);
+    top: 65px;
+    width: 77px;
+    height: 156px;
+    left: 50%
 }
 
 div.wood div.photo > img {
