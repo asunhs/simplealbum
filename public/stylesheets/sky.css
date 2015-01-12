@@ -1,0 +1,293 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+div.sky {
+    font: 14px 'Lobster', cursive;
+    color: #eec;
+    background-color: #9ebeff;
+    background-image: url(../images/clouds.png);
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+div.sky:before {
+    content: '';
+    background-image: url(../images/lensaq.png);
+    width: 830px;
+    height: 830px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: 580px), (max-device-width: 580px) {
+    div.sky:before {
+        top: 80px;
+        left: -60px;
+        background-size: 360px;
+        width: 360px;
+        height: 360px;
+    }
+}
+
+div.sky > div {
+    z-index: 2;
+}
+
+div.sky ul.albums {
+    list-style-type: none;
+    height: 105px;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-align: center;
+    position: fixed;
+    background-color: rgba(235,235,255,.3);
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+div.sky ul.albums > li {
+    display: inline;
+    padding: 10px 30px;
+    margin: 2px;
+    line-height: 100px;
+    cursor: pointer;
+    font-family: 'Lobster', cursive;
+    font-size: 28px;
+}
+
+@media (max-width: 480px), (max-device-width: 480px) {
+    div.sky ul.albums {
+        height: 80px;
+        margin: 0;
+        background-size: 592px;
+    }
+    
+    div.sky ul.albums > li {
+        padding: 10px 20px;
+        line-height: 80px;
+        font-size: 22px;
+    }
+}
+
+div.sky div.photo,
+div.sky div.nav > div {
+    text-align: center;
+}
+
+div.sky div.photo {
+    overflow: hidden;
+    padding-top: 150px;
+    padding-bottom: 60px;
+}
+
+div.sky div.photo:after {
+    content: '';
+    background-image: url(../images/plain.png);
+    position: absolute;
+    top: 70px;
+    width: 180px;
+    height: 180px;
+    left: calc(50% + 150px);
+    left: -o-calc(50% + 150px);
+    left: -ms-calc(50% + 150px);
+    left: -moz-calc(50% + 150px);
+    left: -webkit-calc(50% + 150px);
+}
+
+div.sky div.photo > img {
+    border: 1px solid #ddd;
+    padding: 16px 16px 64px 16px;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px #3e4f71;
+    transform: rotate3d(50,-5,5,10deg);
+}
+
+@media (max-width: 960px) {
+    div.sky div.photo > img {
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 580px), (max-device-width: 580px) {
+    div.sky div.photo {
+        padding-top: 100px;
+    }
+    
+    div.sky div.photo > img {
+        padding: 10px 10px 42px 10px;
+        box-shadow: 3px 3px 12px #3e4f71;
+        max-width: 400px;
+    }
+    
+    div.sky div.photo:after {
+        top: 69px;
+        width: 85px;
+        height: 85px;
+        background-size: 85px;
+        left: calc(50% + 60px);
+        left: -o-calc(50% + 60px);
+        left: -ms-calc(50% + 60px);
+        left: -moz-calc(50% + 60px);
+        left: -webkit-calc(50% + 60px);
+    }
+}
+
+@media (max-device-width: 480px) {
+    div.sky div.photo > img {
+        max-width: 280px;
+    }
+}
+
+@media (max-device-width: 320px) {
+    div.sky div.photo > img {
+        max-width: 220px;
+    }
+}
+
+div.sky div.nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+div.sky div.nav > div.prev,
+div.sky div.nav > div.next {
+    height: 100%;
+    width: 200px;
+    background-color: #87a5e0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    cursor: pointer;
+}
+
+div.sky div.nav > div.prev {
+    left: 0;
+    box-shadow: 20px 0px 50px #87a5e0;
+}
+
+div.sky div.nav > div.next {
+    right: 0;
+    box-shadow: -20px 0px 50px #87a5e0;
+}
+
+div.sky div.nav > div.prev:hover,
+div.sky div.nav > div.next:hover {
+    opacity: .3;
+}
+
+@media (max-width: 580px), (max-device-width: 480px) {
+    div.sky div.nav > div.prev,
+    div.sky div.nav > div.next {
+        width: 100px;
+    }
+    
+    div.sky div.nav > div.prev:hover,
+    div.sky div.nav > div.next:hover {
+        opacity: 0;
+    }
+    
+    div.sky div.nav > div.prev:active,
+    div.sky div.nav > div.next:active {
+        opacity: .3;
+    }
+}
+
+div.sky div.nav > div.thumbs {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 98%;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+
+div.sky div.nav > div.thumbs > img {
+    border: 4px solid #fff;
+    border-bottom: 12px solid #fff;
+    box-shadow: 2px 2px 8px #3e4f71;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 3px;
+}
+
+div.sky div.nav > div.thumbs > img:first-child{
+    margin-left:100px;
+}
+
+div.sky div.nav > div.thumbs > img:last-child{
+    margin-right:100px;
+}
+
+div.sky div.nav > div.thumbs > img:hover,
+div.sky div.nav > div.thumbs > img.on {
+    box-shadow: 2px 14px 8px #3e4f71;
+    position: relative;
+    top: -16px;
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n+1) {
+    transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n+2) {
+    transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n+3) {
+    transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n+4) {
+    transform: rotate(-12deg);
+    -o-transform: rotate(-12deg);
+    -ms-transform: rotate(-12deg);
+    -moz-transform: rotate(-12deg);
+    -webkit-transform: rotate(-12deg);
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n+5) {
+    transform: rotate(-4deg);
+    -o-transform: rotate(-4deg);
+    -ms-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    -webkit-transform: rotate(-4deg);
+}
+
+div.sky div.nav > div.thumbs > img:nth-child(6n) {
+    transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+}
+
+div.sky a {
+  color: #00B7FF;
+}
+
+div.sky .visible {
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+div.sky .hidden {
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
