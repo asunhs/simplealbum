@@ -2,7 +2,7 @@
 
 div.sky {
     font: 14px 'Lobster', cursive;
-    color: #eec;
+    color: #fff;
     background-color: #cae3e8;
     background-image: url(../images/clouds.png);
     width: 100%;
@@ -23,7 +23,7 @@ div.sky:before {
 @media (max-width: 580px), (max-device-width: 580px) {
     
     div.sky {
-        background-size: 1000px;
+        background-size: 600px;
     }
     
     div.sky:before {
