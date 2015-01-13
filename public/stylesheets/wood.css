@@ -113,10 +113,10 @@ div.wood div.photo > img {
     }
     
     div.wood div.photo:after {
-        top: 30px;
-        width: 60px;
-        height: 121px;
-        background-size: 60px;
+        top: 50px;
+        width: 40px;
+        height: 81px;
+        background-size: 40px;
         left: calc(50% + 30px);
         left: -o-calc(50% + 30px);
         left: -ms-calc(50% + 30px);

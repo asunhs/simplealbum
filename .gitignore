@@ -1,3 +1,4 @@
 node_modules
+.idea
 albums
 public/albums
